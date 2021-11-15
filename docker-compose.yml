@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    volumes:
+      - ./data/dev/mongo:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - dev-network
+  restful-api-tsoa:
+    container_name: restful-api-tsoa
+    ports:
+      - "3000:3000"
+    image: restful-api-tsoa:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: develop
+      #NODE_ENV: develop
+      #RUN_MODE: dev-server
+      #RUN_MODE: start
+      #RUN_MODE: dev-tsoa
+      PORT: 3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./logs:/logs
+    env_file:
+      - .env
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    driver: bridge

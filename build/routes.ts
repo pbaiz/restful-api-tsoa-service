@@ -49,7 +49,7 @@ const models: TsoaRoute.Models = {
     "GymSession": {
         "dataType": "refObject",
         "properties": {
-            "dayHour": {"dataType":"array","array":{"ref":"GymDate"},"required":true},
+            "dayHour": {"dataType":"array","array":{"dataType":"refObject","ref":"GymDate"},"required":true},
             "roomId": {"dataType":"string"},
             "instructorId": {"dataType":"string","required":true},
             "serviceId": {"dataType":"string","required":true},
@@ -90,7 +90,7 @@ const models: TsoaRoute.Models = {
             "name": {"dataType":"string","required":true},
             "capacity": {"dataType":"double","required":true},
             "allowedCapacity": {"dataType":"double","required":true},
-            "weeklySchedule": {"dataType":"array","array":{"ref":"GymDate"},"required":true},
+            "weeklySchedule": {"dataType":"array","array":{"dataType":"refObject","ref":"GymDate"},"required":true},
             "monthlyCalendar": {"ref":"Calendar"},
             "_id": {"dataType":"string"},
         },
@@ -197,6 +197,7 @@ export function RegisterRoutes(app: express.Router) {
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
         app.get('/user/login',
+
             function UserController_login(request: any, response: any, next: any) {
             const args = {
                     username: {"in":"query","name":"username","required":true,"dataType":"string"},
@@ -208,18 +209,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
+
+
+              const promise = controller.login.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new UserController();
-
-
-            const promise = controller.login.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/user/signup',
+
             function UserController_signup(request: any, response: any, next: any) {
             const args = {
                     userInfo: {"in":"body","name":"userInfo","required":true,"ref":"User"},
@@ -230,18 +232,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
+
+
+              const promise = controller.signup.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new UserController();
-
-
-            const promise = controller.signup.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/user/refreshToken',
+
             function UserController_refreshToken(request: any, response: any, next: any) {
             const args = {
                     userId: {"in":"query","name":"userId","required":true,"dataType":"string"},
@@ -253,18 +256,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
+
+
+              const promise = controller.refreshToken.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new UserController();
-
-
-            const promise = controller.refreshToken.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/user/logout',
+
             function UserController_logout(request: any, response: any, next: any) {
             const args = {
                     username: {"in":"query","name":"username","required":true,"dataType":"string"},
@@ -277,18 +281,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
+
+
+              const promise = controller.logout.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new UserController();
-
-
-            const promise = controller.logout.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/sessions/get',
+
             function RequestController_getSessions(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -299,18 +304,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getSessions.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getSessions.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/sessions/getCompleted',
+
             function RequestController_getCompletedSessions(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -321,18 +327,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getCompletedSessions.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getCompletedSessions.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/sessions/create',
+
             function RequestController_createSession(request: any, response: any, next: any) {
             const args = {
                     session: {"in":"body","name":"session","required":true,"ref":"GymSession"},
@@ -343,18 +350,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createSession.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createSession.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/sessions/delete',
+
             function RequestController_deleteSession(request: any, response: any, next: any) {
             const args = {
                     sessionId: {"in":"query","name":"sessionId","required":true,"dataType":"string"},
@@ -365,18 +373,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteSession.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteSession.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/sessions/update',
+
             function RequestController_updateSession(request: any, response: any, next: any) {
             const args = {
                     session: {"in":"body","name":"session","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedSession":{"ref":"GymSession","required":true},"sessionId":{"dataType":"string","required":true}}},
@@ -387,18 +396,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateSession.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateSession.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/sessions/calendar',
+
             function RequestController_addSessionToCalendar(request: any, response: any, next: any) {
             const args = {
                     sessionId: {"in":"query","name":"sessionId","required":true,"dataType":"string"},
@@ -410,18 +420,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.addSessionToCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.addSessionToCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/sessions/getClientsBySession',
+
             function RequestController_getClientsBySession(request: any, response: any, next: any) {
             const args = {
                     sessionId: {"in":"query","name":"sessionId","required":true,"dataType":"string"},
@@ -432,18 +443,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getClientsBySession.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getClientsBySession.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/sessions/enqueueWaitingList',
+
             function RequestController_enqueueWaitingList(request: any, response: any, next: any) {
             const args = {
                     waitingClient: {"in":"body","name":"waitingClient","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"clientId":{"dataType":"string","required":true},"sessionId":{"dataType":"string","required":true}}},
@@ -454,18 +466,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.enqueueWaitingList.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.enqueueWaitingList.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/services/get',
+
             function RequestController_getServices(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -476,18 +489,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getServices.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getServices.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/services/create',
+
             function RequestController_createService(request: any, response: any, next: any) {
             const args = {
                     service: {"in":"body","name":"service","required":true,"ref":"Service"},
@@ -498,18 +512,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createService.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createService.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/services/update',
+
             function RequestController_updateService(request: any, response: any, next: any) {
             const args = {
                     service: {"in":"body","name":"service","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedService":{"ref":"Service","required":true},"serviceId":{"dataType":"string","required":true}}},
@@ -520,18 +535,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateService.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateService.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/services/delete',
+
             function RequestController_deleteService(request: any, response: any, next: any) {
             const args = {
                     serviceId: {"in":"query","name":"serviceId","required":true,"dataType":"string"},
@@ -542,18 +558,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteService.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteService.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/users/get',
+
             function RequestController_getUsers(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -564,18 +581,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getUsers.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getUsers.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/users/update',
+
             function RequestController_updateUser(request: any, response: any, next: any) {
             const args = {
                     service: {"in":"body","name":"service","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedUser":{"ref":"User","required":true},"serviceId":{"dataType":"string","required":true}}},
@@ -586,18 +604,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateUser.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateUser.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/users/create',
+
             function RequestController_createUser(request: any, response: any, next: any) {
             const args = {
                     user: {"in":"body","name":"user","required":true,"ref":"User"},
@@ -608,18 +627,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createUser.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createUser.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/users/delete',
+
             function RequestController_deleteSUser(request: any, response: any, next: any) {
             const args = {
                     userId: {"in":"query","name":"userId","required":true,"dataType":"string"},
@@ -630,18 +650,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteSUser.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteSUser.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/rooms/get',
+
             function RequestController_getRooms(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -652,18 +673,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getRooms.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getRooms.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/rooms/update',
+
             function RequestController_updateRoom(request: any, response: any, next: any) {
             const args = {
                     room: {"in":"body","name":"room","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedRoom":{"ref":"Room","required":true},"roomId":{"dataType":"string","required":true}}},
@@ -674,18 +696,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateRoom.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateRoom.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/rooms/create',
+
             function RequestController_createRoom(request: any, response: any, next: any) {
             const args = {
                     room: {"in":"body","name":"room","required":true,"ref":"Room"},
@@ -696,18 +719,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createRoom.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createRoom.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/rooms/delete',
+
             function RequestController_deleteRoom(request: any, response: any, next: any) {
             const args = {
                     roomId: {"in":"query","name":"roomId","required":true,"dataType":"string"},
@@ -718,18 +742,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteRoom.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteRoom.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/rooms/giveClientReward',
+
             function RequestController_giveClientReward(request: any, response: any, next: any) {
             const args = {
             };
@@ -739,18 +764,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.giveClientReward.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.giveClientReward.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/instructor/get',
+
             function RequestController_getInstructor(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -761,18 +787,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getInstructor.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getInstructor.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/instructor/update',
+
             function RequestController_updateInstructor(request: any, response: any, next: any) {
             const args = {
                     instructor: {"in":"body","name":"instructor","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedInstructor":{"ref":"Room","required":true},"instructorId":{"dataType":"string","required":true}}},
@@ -783,18 +810,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateInstructor.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateInstructor.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/instructor/create',
+
             function RequestController_createInstructor(request: any, response: any, next: any) {
             const args = {
                     instructor: {"in":"body","name":"instructor","required":true,"ref":"Instructor"},
@@ -805,18 +833,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createInstructor.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createInstructor.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/instructor/delete',
+
             function RequestController_deleteInstructor(request: any, response: any, next: any) {
             const args = {
                     instructorId: {"in":"query","name":"instructorId","required":true,"dataType":"string"},
@@ -827,18 +856,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteInstructor.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteInstructor.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/calendar/get',
+
             function RequestController_getCalendar(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -849,18 +879,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/calendar/update',
+
             function RequestController_updateCalendar(request: any, response: any, next: any) {
             const args = {
                     calendar: {"in":"body","name":"calendar","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedCalendar":{"ref":"Calendar","required":true},"calendarId":{"dataType":"string","required":true}}},
@@ -871,18 +902,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/calendar/create',
+
             function RequestController_createCalendar(request: any, response: any, next: any) {
             const args = {
                     calendar: {"in":"body","name":"calendar","required":true,"ref":"Calendar"},
@@ -893,18 +925,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/calendar/delete',
+
             function RequestController_deleteCalendar(request: any, response: any, next: any) {
             const args = {
                     calendarId: {"in":"query","name":"calendarId","required":true,"dataType":"string"},
@@ -915,18 +948,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/calendar/get',
+
             function RequestController_getCalendarByRoom(request: any, response: any, next: any) {
             const args = {
                     roomId: {"in":"query","name":"roomId","required":true,"dataType":"string"},
@@ -937,18 +971,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getCalendarByRoom.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getCalendarByRoom.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/calendar/publish',
+
             function RequestController_publishCalendar(request: any, response: any, next: any) {
             const args = {
                     calendarId: {"in":"query","name":"calendarId","required":true,"dataType":"string"},
@@ -959,18 +994,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.publishCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.publishCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/calendar/getFilter',
+
             function RequestController_getFilterCalendar(request: any, response: any, next: any) {
             const args = {
                     roomId: {"in":"query","name":"roomId","required":true,"dataType":"string"},
@@ -982,18 +1018,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getFilterCalendar.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getFilterCalendar.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/reservation/get',
+
             function RequestController_getReservation(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -1004,18 +1041,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getReservation.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getReservation.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/reservation/getByClient',
+
             function RequestController_getReservationByClient(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1026,18 +1064,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getReservationByClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getReservationByClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/reservation/update',
+
             function RequestController_updateReservation(request: any, response: any, next: any) {
             const args = {
                     reservation: {"in":"body","name":"reservation","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedReservation":{"ref":"Reservation","required":true},"reservationId":{"dataType":"string","required":true}}},
@@ -1048,18 +1087,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateReservation.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateReservation.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/reservation/create',
+
             function RequestController_createReservation(request: any, response: any, next: any) {
             const args = {
                     reservation: {"in":"body","name":"reservation","required":true,"ref":"Reservation"},
@@ -1070,18 +1110,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createReservation.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createReservation.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/reservation/delete',
+
             function RequestController_deleteReservation(request: any, response: any, next: any) {
             const args = {
                     reservationId: {"in":"query","name":"reservationId","required":true,"dataType":"string"},
@@ -1092,18 +1133,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteReservation.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteReservation.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/reservation/cancel',
+
             function RequestController_cancelReservation(request: any, response: any, next: any) {
             const args = {
                     reservationId: {"in":"query","name":"reservationId","required":true,"dataType":"string"},
@@ -1114,18 +1156,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.cancelReservation.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.cancelReservation.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/membership/get',
+
             function RequestController_getMembership(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -1136,18 +1179,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getMembership.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getMembership.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/membership/update',
+
             function RequestController_updateMembership(request: any, response: any, next: any) {
             const args = {
                     membership: {"in":"body","name":"membership","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedMembership":{"ref":"Membership","required":true},"membershipId":{"dataType":"string","required":true}}},
@@ -1158,18 +1202,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateMembership.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateMembership.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/membership/create',
+
             function RequestController_createMembership(request: any, response: any, next: any) {
             const args = {
                     requestMembership: {"in":"body","name":"requestMembership","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"pPayment":{"ref":"Payment","required":true},"clientId":{"dataType":"string","required":true},"pMembership":{"ref":"Membership","required":true}}},
@@ -1180,18 +1225,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createMembership.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createMembership.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/membership/delete',
+
             function RequestController_deleteMembership(request: any, response: any, next: any) {
             const args = {
                     membershipId: {"in":"query","name":"membershipId","required":true,"dataType":"string"},
@@ -1202,18 +1248,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteMembership.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteMembership.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/membership/hasActiveMembership',
+
             function RequestController_hasActiveMembership(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1224,18 +1271,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.hasActiveMembership.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.hasActiveMembership.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/membership/isDefaulter',
+
             function RequestController_isDefaulter(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1246,18 +1294,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.isDefaulter.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.isDefaulter.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/membership/itsAllowedToReserve',
+
             function RequestController_itsAllowedToReserve(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1268,18 +1317,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.itsAllowedToReserve.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.itsAllowedToReserve.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/membership/applyCharge',
+
             function RequestController_applyCharge(request: any, response: any, next: any) {
             const args = {
                     requestCharge: {"in":"body","name":"requestCharge","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"pPayment":{"ref":"Payment","required":true},"pClientId":{"dataType":"string","required":true}}},
@@ -1290,18 +1340,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.applyCharge.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.applyCharge.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/membershipoffer/get',
+
             function RequestController_getMembershipOffer(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -1312,18 +1363,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getMembershipOffer.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getMembershipOffer.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/membershipoffer/create',
+
             function RequestController_createMembershipOffer(request: any, response: any, next: any) {
             const args = {
                     membershipOffer: {"in":"body","name":"membershipOffer","required":true,"ref":"MembershipOffer"},
@@ -1334,18 +1386,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createMembershipOffer.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createMembershipOffer.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/payment/get',
+
             function RequestController_getPayment(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -1356,18 +1409,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getPayment.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getPayment.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/payment/update',
+
             function RequestController_updatePayment(request: any, response: any, next: any) {
             const args = {
                     payment: {"in":"body","name":"payment","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedPayment":{"ref":"Payment","required":true},"paymentId":{"dataType":"string","required":true}}},
@@ -1378,18 +1432,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updatePayment.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updatePayment.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/payment/create',
+
             function RequestController_createPayment(request: any, response: any, next: any) {
             const args = {
                     payment: {"in":"body","name":"payment","required":true,"ref":"Payment"},
@@ -1400,18 +1455,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createPayment.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createPayment.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/payment/delete',
+
             function RequestController_deletePayment(request: any, response: any, next: any) {
             const args = {
                     paymentId: {"in":"query","name":"paymentId","required":true,"dataType":"string"},
@@ -1422,18 +1478,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deletePayment.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deletePayment.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/client/get',
+
             function RequestController_getClient(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -1444,18 +1501,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/client/getCompleted',
+
             function RequestController_getCompletedClient(request: any, response: any, next: any) {
             const args = {
                     params: {"in":"body","name":"params","required":true,"ref":"GetParamsBody"},
@@ -1466,18 +1524,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getCompletedClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getCompletedClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/client/update',
+
             function RequestController_updateClient(request: any, response: any, next: any) {
             const args = {
                     client: {"in":"body","name":"client","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"updatedClient":{"ref":"Client","required":true},"clientId":{"dataType":"string","required":true}}},
@@ -1488,18 +1547,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.updateClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.updateClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/client/create',
+
             function RequestController_createClient(request: any, response: any, next: any) {
             const args = {
                     client: {"in":"body","name":"client","required":true,"dataType":"any"},
@@ -1510,18 +1570,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.createClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.createClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/client/delete',
+
             function RequestController_deleteClient(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1532,18 +1593,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/client/getOne',
+
             function RequestController_getOneClient(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1554,18 +1616,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getOneClient.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getOneClient.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/client/addFavoriteService',
+
             function RequestController_addFavoriteService(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1577,18 +1640,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.addFavoriteService.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.addFavoriteService.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/client/deleteFavoriteService',
+
             function RequestController_deleteFavoriteService(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1600,18 +1664,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteFavoriteService.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteFavoriteService.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/client/getFavoritesServices',
+
             function RequestController_getFavoriteService(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1622,18 +1687,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.getFavoriteService.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.getFavoriteService.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/client/addNotification',
+
             function RequestController_addNotification(request: any, response: any, next: any) {
             const args = {
                     notification: {"in":"body","name":"notification","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"message":{"dataType":"string","required":true},"clientId":{"dataType":"string","required":true}}},
@@ -1644,18 +1710,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.addNotification.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.addNotification.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/client/deleteNotification',
+
             function RequestController_deleteNotification(request: any, response: any, next: any) {
             const args = {
                     clientId: {"in":"query","name":"clientId","required":true,"dataType":"string"},
@@ -1667,18 +1734,19 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.deleteNotification.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.deleteNotification.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/client/checkStars',
+
             function RequestController_checkStars(request: any, response: any, next: any) {
             const args = {
             };
@@ -1688,15 +1756,15 @@ export function RegisterRoutes(app: express.Router) {
             let validatedArgs: any[] = [];
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new RequestController();
+
+
+              const promise = controller.checkStars.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
             }
-
-            const controller = new RequestController();
-
-
-            const promise = controller.checkStars.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
